@@ -21,7 +21,7 @@ RUN yarn build
 FROM nginx:alpine
 
 # Sao chép build folder từ container trước đó vào thư mục mà Nginx sử dụng để phục vụ tệp tĩnh
-COPY --from=0 /app/build /usr/share/nginx/html
+COPY --from=0 /app/dist /usr/share/nginx/html
 
 # Expose cổng 80 cho Nginx
 EXPOSE 80
