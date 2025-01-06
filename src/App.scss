@@ -2,10 +2,22 @@ main {
   background-color: #f5f5f7;
 }
 
+.content {
+  min-height: calc(100vh - 80px);
+}
+
 .content-left {
+  .old-card {
+    aspect-ratio: 400 / 252;
+  }
+
+  .passport {
+    aspect-ratio: 7 / 10;
+  }
+
   .card {
     max-width: 400px;
-    aspect-ratio: 400 / 252;
+
     @apply relative flex items-center justify-center bg-gray-200 rounded-lg;
     border: 2px dashed #ccc;
 
@@ -52,7 +64,6 @@ main {
 
 .content-right {
   color: #121212;
-  background: white;
 
   .field {
     label {
@@ -66,4 +77,12 @@ main {
       }
     }
   }
+}
+
+nav a {
+  @apply px-2 py-5 text-sm lg:p-5 lg:text-base;
+}
+
+.active-link {
+  @apply text-blue-500 font-semibold;
 }
