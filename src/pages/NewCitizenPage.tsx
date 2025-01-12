@@ -16,7 +16,7 @@ type TData = {
   home: string;
 };
 
-const OldCitizenPage: React.FC = () => {
+const NewCitizenPage: React.FC = () => {
   const [frontImage, setFrontImage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>();
 
@@ -42,7 +42,7 @@ const OldCitizenPage: React.FC = () => {
         const formData = new FormData();
         formData.append("image", file, file.name);
 
-        const response = await axios.post("http://116.99.48.48:10004/ocr/v1.0/gttt-old-extractor", formData, {
+        const response = await axios.post("http://116.99.48.48:10004/ocr/v1.0/gttt-new-extractor", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -84,7 +84,7 @@ const OldCitizenPage: React.FC = () => {
       </header>
       <main className="flex justify-center w-full lg:items-center content">
         <div className="container px-4 py-6 lg:px-0 lg:py-0">
-          <h1 className="mb-5 text-xl font-bold">Extract your old citizen information</h1>
+          <h1 className="mb-5 text-xl font-bold">Extract your new citizen information</h1>
           <div className="flex flex-col justify-between w-full gap-5 rounded-lg lg:flex-row">
             <div className="content-left">
               <div className="w-full old-card card lg:w-[400px]">
@@ -139,4 +139,4 @@ const OldCitizenPage: React.FC = () => {
   );
 };
 
-export default OldCitizenPage;
+export default NewCitizenPage;

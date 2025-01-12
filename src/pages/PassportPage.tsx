@@ -6,8 +6,8 @@ import { NavLink } from "react-router-dom";
 import "../App.scss";
 
 type TData = {
-  type: string;
-  state: string;
+  sex: string;
+  placeOfBirth: string;
   passportNo: string;
   surname: string;
   givenNames: string;
@@ -46,26 +46,26 @@ const PassportPage: React.FC = () => {
         const formData = new FormData();
         formData.append("image", file, file.name);
 
-        const response = await axios.post("http://116.104.73.112:10004/ocr/v1.0/gttt_extractor", formData, {
+        const response = await axios.post("http://116.99.48.48:10004/ocr/v1.0/passport-extractor", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
 
-        console.log("Response:", response.data);
+        console.log("Response:", response.data.data);
         if (response.data.data) {
-          setValue("type", response.data.data.type.replace(/\f/g, ""));
-          setValue("state", response.data.data.state.replace(/\f/g, ""));
-          setValue("passportNo", response.data.data.passportNo.replace(/\f/g, ""));
+          setValue("sex", response.data.data.sex.replace(/\f/g, ""));
+          setValue("placeOfBirth", response.data.data.place_of_birth.replace(/\f/g, ""));
+          setValue("passportNo", response.data.data.passport_id.replace(/\f/g, ""));
           setValue("surname", response.data.data.surname.replace(/\f/g, ""));
-          setValue("givenNames", response.data.data.givenNames.replace(/\f/g, ""));
-          setValue("nameInLao", response.data.data.nameInLao.replace(/\f/g, ""));
+          setValue("givenNames", response.data.data.given_name.replace(/\f/g, ""));
+          setValue("nameInLao", response.data.data.name_in_lao.replace(/\f/g, ""));
           setValue("nationality", response.data.data.nationality.replace(/\f/g, ""));
-          setValue("dateOfBirth", response.data.data.dateOfBirth.replace(/\f/g, ""));
+          setValue("dateOfBirth", response.data.data.dob.replace(/\f/g, ""));
           setValue("authority", response.data.data.authority.replace(/\f/g, ""));
-          setValue("dateOfIssue", response.data.data.dateOfIssue.replace(/\f/g, ""));
-          setValue("dateOfExpired", response.data.data.dateOfExpired.replace(/\f/g, ""));
-          setValue("mrzCode", response.data.data.mrzCode.replace(/\f/g, ""));
+          setValue("dateOfIssue", response.data.data.date_of_issue.replace(/\f/g, ""));
+          setValue("dateOfExpired", response.data.data.date_of_expiry.replace(/\f/g, ""));
+          // setValue("mrzCode", response.data.data.mrzCode.replace(/\f/g, ""));
         }
         setLoading(false);
       } catch (error) {
@@ -85,7 +85,7 @@ const PassportPage: React.FC = () => {
           <NavLink to="/passport" className={({ isActive }) => (isActive ? "active-link" : "")}>
             Passport
           </NavLink>
-          <NavLink to="/old" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <NavLink to="/old-citizen" className={({ isActive }) => (isActive ? "active-link" : "")}>
             Old ID card
           </NavLink>
         </nav>
@@ -119,18 +119,6 @@ const PassportPage: React.FC = () => {
               </div>
               <form className="grid grid-cols-1 gap-5 p-4 pb-10 bg-white rounded-lg shadow-md field-group md:grid-cols-2 xl:grid-cols-3">
                 <div className="field">
-                  <label htmlFor="type">Type</label>
-                  <input type="text" id="type" placeholder="" disabled {...register("type")} />
-                </div>
-                <div className="field">
-                  <label htmlFor="state">Code of Issuing State</label>
-                  <input type="text" id="state" placeholder="" disabled {...register("state")} />
-                </div>
-                <div className="field">
-                  <label htmlFor="passportNo">Passport No</label>
-                  <input type="text" id="passportNo" placeholder="" disabled {...register("passportNo")} />
-                </div>
-                <div className="field">
                   <label htmlFor="surname">Surname</label>
                   <input type="text" id="surname" placeholder="" disabled {...register("surname")} />
                 </div>
@@ -143,16 +131,20 @@ const PassportPage: React.FC = () => {
                   <input type="text" id="nameInLao" placeholder="" disabled {...register("nameInLao")} />
                 </div>
                 <div className="field">
+                  <label htmlFor="sex">Sex</label>
+                  <input type="text" id="sex" placeholder="" disabled {...register("sex")} />
+                </div>
+                <div className="field">
+                  <label htmlFor="placeOfBirth">Place of birth</label>
+                  <input type="text" id="placeOfBirth" placeholder="" disabled {...register("placeOfBirth")} />
+                </div>
+                <div className="field">
                   <label htmlFor="nationality">Nationality</label>
                   <input type="text" id="nationality" placeholder="" disabled {...register("nationality")} />
                 </div>
                 <div className="field">
                   <label htmlFor="dateOfBirth">Date of birth</label>
                   <input type="text" id="dateOfBirth" placeholder="" disabled {...register("dateOfBirth")} />
-                </div>
-                <div className="field">
-                  <label htmlFor="authority">Authority</label>
-                  <input type="text" id="dateOfBirth" placeholder="" disabled {...register("authority")} />
                 </div>
                 <div className="field">
                   <label htmlFor="dateOfIssue">Date of issue</label>
@@ -163,9 +155,17 @@ const PassportPage: React.FC = () => {
                   <input type="text" id="dateOfExpired" placeholder="" disabled {...register("dateOfExpired")} />
                 </div>
                 <div className="field">
+                  <label htmlFor="passportNo">Passport No</label>
+                  <input type="text" id="passportNo" placeholder="" disabled {...register("passportNo")} />
+                </div>
+                <div className="field">
+                  <label htmlFor="authority">Authority</label>
+                  <input type="text" id="dateOfBirth" placeholder="" disabled {...register("authority")} />
+                </div>
+                {/* <div className="field">
                   <label htmlFor="mrzCode">MRZ code</label>
                   <input type="text" id="mrzCode" placeholder="" disabled {...register("mrzCode")} />
-                </div>
+                </div> */}
               </form>
             </div>
           </div>
