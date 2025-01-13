@@ -70,7 +70,7 @@ const NewCitizenPage: React.FC = () => {
   return (
     <Fragment>
       <header className="flex items-center justify-center w-full h-16 bg-white lg:h-20">
-        <nav className="flex items-center justify-center gap-5 text-center">
+        <nav className="flex items-center justify-center gap-3 text-center lg:gap-5">
           <NavLink to="/" className={({ isActive }) => (isActive ? "active-link" : "")}>
             New ID card
           </NavLink>
@@ -79,6 +79,9 @@ const NewCitizenPage: React.FC = () => {
           </NavLink>
           <NavLink to="/old-citizen" className={({ isActive }) => (isActive ? "active-link" : "")}>
             Old ID card
+          </NavLink>
+          <NavLink to="/family-book" className={({ isActive }) => (isActive ? "active-link" : "")}>
+            Family book
           </NavLink>
         </nav>
       </header>
