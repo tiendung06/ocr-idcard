@@ -42,7 +42,7 @@ const PassportPage: React.FC = () => {
         const formData = new FormData();
         formData.append("image", file, file.name);
 
-        const response = await axios.post("http://116.99.48.48:10004/ocr/v1.0/family-book-extractor", formData, {
+        const response = await axios.post("http://116.111.110.8:10004/ocr/v1.0/family-book-extractor", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
